@@ -3,28 +3,28 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../user.service';
 
 @Component({
-    selector: 'app-user',
-    templateUrl: './user.component.html',
-    styleUrls: ['./user.component.css']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-    id: number;
+  id?: number;
 
-    activated = false;
+  activated = false;
 
-    constructor(
-        private route: ActivatedRoute,
-        private userService: UserService
-    ) {}
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserService
+  ) {}
 
-    ngOnInit() {
-        this.route.params.subscribe((params: Params) => {
-            this.id = +params.id;
-        });
-    }
+  ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      this.id = +params['id'];
+    });
+  }
 
-    onActivate() {
-        this.activated = !this.activated;
-        this.userService.activated.next(this.activated);
-    }
+  onActivate() {
+    this.activated = !this.activated;
+    this.userService.activated.next(this.activated);
+  }
 }
